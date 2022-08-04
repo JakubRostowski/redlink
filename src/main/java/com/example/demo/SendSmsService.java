@@ -28,7 +28,12 @@ public class SendSmsService {
         return mapToSendSmsMessageResponse(response);
     }
 
-    private SendSmsMessageResponse mapToSendSmsMessageResponse(HttpResponse<String> response) {
-        return gson.fromJson(response.getBody(), SendSmsMessageResponse.class);
+    private SendSmsMessageResponse mapToSendSmsMessageResponse(HttpResponse<String> response)
+    {
+        SendSmsMessageResponse sendSmsMessageResponse = gson.fromJson(response.getBody(), SendSmsMessageResponse.class);
+        if (sendSmsMessageResponse.getErrors() != null) {
+            throw new RuntimeException("An error has occurred: " + sendSmsMessageResponse.getMeta().toString());
+        }
+        return sendSmsMessageResponse;
     }
 }
