@@ -31,7 +31,7 @@ public class SendSmsService {
     private SendSmsMessageResponse mapToSendSmsMessageResponse(HttpResponse<String> response)
     {
         SendSmsMessageResponse sendSmsMessageResponse = gson.fromJson(response.getBody(), SendSmsMessageResponse.class);
-        if (sendSmsMessageResponse.getData() == null) {
+        if (sendSmsMessageResponse.getMeta().getStatus() == 200) {
             throw new RuntimeException("An error has occurred: " + sendSmsMessageResponse.getMeta().toString());
         }
         return sendSmsMessageResponse;
