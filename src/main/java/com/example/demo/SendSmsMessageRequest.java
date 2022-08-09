@@ -9,10 +9,14 @@ public class SendSmsMessageRequest {
     private String text;
     private String applicationId;
     private String applicationToken;
+    private String webhookUrl;
     private boolean isCounterPrefix;
 
     public String getHttpBody() {
-        return "{\"sender\":\"" + this.sender + "\",\"message\":\"" + this.text + "\",\"phoneNumbers\":[\"" + this.phone + "\"]}";
+        return "{\"sender\":\"" + this.sender +
+                "\",\"message\":\"" + this.text +
+                "\",\"phoneNumbers\":[\"" + this.phone + "\"]" +
+                "\",\"webhookUrl\":\"" + this.webhookUrl + "\"}";
     }
 
     public SendSmsMessageRequest setSender(String sender) {
